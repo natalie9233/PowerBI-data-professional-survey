@@ -100,23 +100,7 @@ For example, `Other (Please Specify): Somalia` was grouped under `Other`.
 
 This transformation removed the specific country names entered under “Other.” That category therefore represents a combined group of countries and should be interpreted accordingly.
 
-### 8. Create an Entry Difficulty Sort Column
-
-**Action:** Duplicated `Q7 - How difficult was it for you to break into Data?`, replaced the response labels with ordered codes, and renamed the new column `difficult  order`.
-
-| Original Response | Sort Code |
-| --- | --- |
-| Very Easy | 1 |
-| Easy | 2 |
-| Neither easy nor difficult | 3 |
-| Difficult | 4 |
-| Very Difficult | 5 |
-
-When replacing text, I processed `Very Easy` before `Easy`, and `Very Difficult` before `Difficult`, to prevent partial replacements from changing the longer labels incorrectly.
-
-**Reason:** The responses have a natural order from easiest to most difficult. Alphabetical sorting would not preserve that order. A separate sort column retained the original labels while providing codes for ordering them consistently.
-
-### 9. Reshape Satisfaction Scores into a Long-Format Table
+### 8. Reshape Satisfaction Scores into a Long-Format Table
 
 **Action:**
 
@@ -128,7 +112,15 @@ When replacing text, I processed `Very Easy` before `Easy`, and `Very Difficult`
 
 Before the transformation, each respondent’s satisfaction scores were stored in separate columns. After unpivoting, each row represented one respondent’s score for one satisfaction aspect.
 
-The following example illustrates the structure; it does not contain actual respondent records. Aspect labels are shown in a simplified form.
+The following examples illustrate the structure before and after reshaping; they do not contain actual respondent records. Column and aspect labels are shown in a simplified form.
+
+**Before reshaping (wide format):** Each respondent occupies one row, with a separate column for each satisfaction aspect.
+
+| Unique ID | Job Title | Gender | Salary | Work-Life Balance | Career Advancement |
+| --- | --- | --- | ---: | ---: | ---: |
+| A001 | Data Analyst | Female | 6 | 8 | 5 |
+
+**After reshaping (long format):** Each row contains one respondent’s score for one satisfaction aspect.
 
 | Unique ID | Job Title | Gender | Satisfaction Aspect | score |
 | --- | --- | --- | --- | --- |
